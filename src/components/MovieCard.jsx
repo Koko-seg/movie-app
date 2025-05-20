@@ -8,11 +8,11 @@ export const MovieCard = () => {
         className="w-[158px] h-[234px] md:w-[230px] md:h-[340px]"
       />
       <div className="w-[158px] md:w-[230px] md:h-[96px] bg-[#F4F4F5] h-[76px] rounded-lg justify-between ">
-        <div className="flex">
+        <div className="flex gap-[4px] p-[8px] items-center">
           <Star className=" text-yellow-300 fill-amber-300 w-[16px] h-[16px]" />
-          <p className="text-[12px]">6.9/10</p>
+          <p className="fon-medium text-[#09090B]">6.9/10</p>
         </div>
-        <p className="text-[16px]">Dear Santa</p>
+        <p className="font-medium text-[#71717A] pl-[8px]">Dear Santa</p>
       </div>
     </div>
   );

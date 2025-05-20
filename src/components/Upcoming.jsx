@@ -6,8 +6,8 @@ export const Upcoming = () => {
     <div className="flex flex-col gap-8 p-5 md:px-20 ">
       <div className="flex justify-between md:gap-[32px]">
         <h1 className=" font-semibold text-[black] ">Upcoming</h1>
-        <div className="flex">
-          See more <ArrowRight />
+        <div className="flex gap-2 text-[#18181B] items-center">
+          See more <ArrowRight className="w-[16px] h-[16px]" />
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5">
