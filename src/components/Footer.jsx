@@ -2,14 +2,14 @@ import { FilmIcon, Mail, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <div className="px-[20px] py-[40px]  sm:h-[308px]  md:h-[280px] max-w-screen bg-indigo-700 text-white pt-[25px]">
-      <div className="font-[400] text-[12   px] p-2">
+    <div className="px-[20px] py-[40px]  sm:h-[308px]  md:h-[280px] max-w-screen bg-indigo-700 text-white pt-[25px]  ">
+      <div className="font-[400] text-[12px] p-2">
         <div className="flex gap-[5px]">
-          <FilmIcon className="mb-[13px]" /> <span>Movie Z</span>
+          <FilmIcon className="mb-[13px]" /> <p>Movie Z</p>
         </div>
         <p>© 2024 Movie Z. All Rights Reserved.</p>
       </div>
-      <div className="flex gap-[20px]">
+      <div className=" flex gap-[20px]">
         <div className="font-[400] text-[12px]">
           <p>Contact Information</p>
           <div className="flex gap-[10px] py-[12px] items-center">
