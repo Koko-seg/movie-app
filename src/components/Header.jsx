@@ -15,10 +15,10 @@ export const Header = () => {
       
         <div className="invisible md:visible flex gap-[12px] ">
            <Button variant="outline"><ChevronDown/>Genre</Button>
-           <div className="relative flex items-center justify-between">
-         <Search className="absolute"/>
-             <Input type="text" placeholder="Search"/>
-             </div>
+           <Button variant="outline">
+             <Search/>
+             <input type="text" placeholder="Search" className="outline-none"/>
+            </Button>
         </div>
         <div className="flex items-center gap-[12px]"> 
           
