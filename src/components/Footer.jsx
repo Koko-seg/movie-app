@@ -2,7 +2,7 @@ import { FilmIcon, Mail, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <div className="px-[20px] py-[40px] md:flex md:gap-[889px] max-w-screen bg-indigo-700 text-white pt-[25px]  ">
+    <div className="px-[20px] py-[40px] md:flex md:gap-[700px] max-w-screen bg-indigo-700 text-white pt-[25px]  ">
       <div className="font-[400] text-[12px] p-2">
         <div className="flex gap-[5px]">
           <FilmIcon className="mb-[13px]" /> <p>Movie Z</p>

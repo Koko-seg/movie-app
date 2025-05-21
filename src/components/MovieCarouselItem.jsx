@@ -1,11 +1,12 @@
 import { Star, Play } from "lucide-react";
+import { Button } from "./ui/button";
 
 export const MovieCarouselItem = (props) => {
   return (
     <div className="relative">
       <img
         src="/cardPic/wicked.jpg"
-        className="w-screen min-h-[246px] md:max-h-[600px] object-cover lg:object-top"
+        className="w-screen min-h-[246px] md:max-h-[600px] "
       />
       <div className="flex flex-col gap-[16px] m-[20px] md:absolute top-[178px] left-[120px] md:text-[white]  md:w-[404px]">
         <div className="flex w-[335px] h-[52px] justify-between items-center">
@@ -30,6 +31,9 @@ export const MovieCarouselItem = (props) => {
           of Oz. After an encounter with the Wonderful Wizard of Oz, their
           friendship reaches a crossroads.
         </p>
+        {/* <Button variant="outline" className="flex  md:bg-white md:text-[black]">
+          <Play /> Watch Trailer
+        </Button> */}
         <button className="flex gap-[2px] px-[16px] py-[8px] bg-black text-[white] w-fit rounded-[6px] md:bg-white md:text-[black]">
           <Play /> Watch Trailer
         </button>
