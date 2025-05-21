@@ -5,7 +5,7 @@ import { Input } from "./ui/input";
 export const Header = () => {
   return (
     <div>
-      <nav className="flex md:w-full p-[20px] md:justify-between justify-between  h-[59px] items-center">
+      <nav className="flex md:w-full p-[20px] md:justify-between justify-between  items-center">
         <div className="flex justify-center text-[#4338CA] ">
           <Film />
           <b className="text-[16px">
@@ -13,7 +13,7 @@ export const Header = () => {
           </b>
         </div>
 
-        <div className="invisible md:visible flex gap-[12px] ">
+        <div className="hidden md:flex gap-[12px] ">
           <Button variant="outline">
             <ChevronDown />
             Genre
@@ -24,7 +24,7 @@ export const Header = () => {
           </Button>
         </div>
         <div className="flex items-center gap-[12px]">
-          <Button variant="outline" className="visible sm:invisible">
+          <Button variant="outline" className="flex md:hidden">
             <Search />
           </Button>
 

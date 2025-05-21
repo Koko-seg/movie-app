@@ -7,8 +7,24 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { MovieCarouselItem } from "./MovieCarouselItem";
+import { useState, useEffect } from "react";
+import { getNowPlayingMovies } from "@/lib/api/get-playing-now";
 
-export const MovCarousel = ({ nowPlayingMovies }) => {
+export const MovCarousel = () => {
+  const [nowPlayingMovie, setNowPlayingMovie] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const movies = await getNowPlayingMovies();
+        setNowPlayingMovie(movies);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMovies();
+  }, []);
+
   return (
     <Carousel
       className="relative "
@@ -19,26 +35,24 @@ export const MovCarousel = ({ nowPlayingMovies }) => {
       ]}
     >
       <CarouselContent>
-        {nowPlayingMovies?.slice(0.5).map((movie, index) => {
-          const imageUrl = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/original${movie.backdrop_path}`;
-          return (
-            <CarouselItem key={index}>
-              <div className="relative">
-                <Image
-                  src={imageUrl}
-                  layout="fill"
-                  alt="poster"
-                  objectFit="cover"
-                />
-
-                <MovieCarouselItem title={movie.title} />
-              </div>
-            </CarouselItem>
-          );
-        })}
+        {nowPlayingMovie?.map((movie, index) => (
+          <CarouselItem key={index}>
+            <div className="relative">
+              <MovieCarouselItem movie={movie} />
+            </div>
+          </CarouselItem>
+        ))}
       </CarouselContent>
       <CarouselPrevious className="invisible lg:visible absolute left-10 to-50%" />
       <CarouselNext className="invisible lg:visible absolute right-10 to-50%" />
     </Carousel>
   );
 };
+
+const logger = () => {
+  console.log("hi");
+}; // sync
+
+setTimeout(() => {
+  logger();
+}, 5000); // async

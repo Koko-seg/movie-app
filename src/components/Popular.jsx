@@ -1,8 +1,20 @@
 import { ArrowRight } from "lucide-react";
 import { MovieCard } from "@/components/MovieCard";
 import { Button } from "./ui/button";
+import { useState,useEffect } from "react";
+import { getPopularMovies } from "@/lib/api/get-popular-movies";
 
 export const Popular = () => {
+  const [popularMovies,setPopularMovies]=useState ([])
+  
+    useEffect (()=> {
+      const fetchMovies = async ()=> {
+        const popularMovies= await getPopularMovies()
+  
+        setPopularMovies (popularMovies)
+      }
+      fetchMovies ()
+    }, [])
   return (
     <div className="flex flex-col  p-5 md:px-20 ">
       <div className="flex justify-between md:gap-[32px]">
@@ -12,8 +24,8 @@ export const Popular = () => {
         </Button>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 gap-8">
-        {Array.from({ length: 10 }).map((_, index) => (
-          <MovieCard />
+        {popularMovies?.map((movie) => (
+          <MovieCard key={movie.id} movie={movie}/>
         ))}
       </div>
     </div>
