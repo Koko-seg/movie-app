@@ -6,9 +6,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { MovieCarouselItem } from "./MovieCarouselItem";
+
 import { useState, useEffect } from "react";
 import { getNowPlayingMovies } from "@/lib/api/get-playing-now";
+import { MovieCarouselItem } from "./MovieCarouselItem";
 
 export const MovCarousel = () => {
   const [nowPlayingMovie, setNowPlayingMovie] = useState([]);
@@ -38,7 +39,7 @@ export const MovCarousel = () => {
         {nowPlayingMovie?.map((movie, index) => (
           <CarouselItem key={index}>
             <div className="relative">
-              <MovieCarouselItem movie={movie} />
+              <MovieCarouselItem movie={movie} movieId={movie.id} />
             </div>
           </CarouselItem>
         ))}
@@ -49,10 +50,8 @@ export const MovCarousel = () => {
   );
 };
 
-const logger = () => {
-  console.log("hi");
-}; // sync
+const logger = () => {};
 
 setTimeout(() => {
   logger();
-}, 5000); // async
+}, 5000);

@@ -1,6 +1,5 @@
 import { Search, Moon, Film, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 
 export const Header = () => {
   return (
@@ -36,4 +35,3 @@ export const Header = () => {
     </div>
   );
 };
-//  className="w-[12px] h-[12px]"
