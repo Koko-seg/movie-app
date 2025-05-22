@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getMovieById } from "@/lib/api/get-movie-id";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Star } from "lucide-react";
+
 import { CoverDe } from "@/components/detailsCom/CoverDe";
 
 export default function Page() {
@@ -21,7 +21,7 @@ export default function Page() {
     getMovie();
   }, []);
   return (
-    <div>
+    <div className="w-full lg:max-w-[1278px] mx-auto">
       <Header />
       <CoverDe />
       <Footer />
