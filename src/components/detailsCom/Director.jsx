@@ -1,21 +1,9 @@
 import { getMoreInfo } from "@/lib/api/get-more-info";
 import { useState, useEffect } from "react";
 
-export const Director = () => {
-  const [director, setDirector] = useState([]);
+export const Director = ({director}) => {
 
-  useEffect(() => {
-    if (!id) return;
-    const getDirector = async () => {
-      try {
-        const movies = await getMoreInfo(id);
-        setDirector(movies);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getDirector();
-  }, [id]);
+
   return (
     <div className="flex-col  flex gap-y-[33px]  divide-y">
       <div className="flex px-[20px] gap-13">

@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 
 export const InfoDe = ({ movie }) => {
-  console.log(movie);
+  console.log(movie.genres);
   const littlePoster = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/${movie?.poster_path}`;
   return (
     <div>
@@ -20,7 +20,7 @@ export const InfoDe = ({ movie }) => {
             ))}
           </div>
 
-          <p className="text-[16px]">{movie?.overview}</p>
+          <p className="text-[16px] p-[20px]">{movie?.overview}</p>
         </div>
       </div>
     </div>
