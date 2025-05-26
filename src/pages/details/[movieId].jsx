@@ -12,31 +12,10 @@ import { MoreLikeThis } from "@/components/detailsCom/MoreLikeThis";
 import { getLikeThis } from "@/lib/api/get-like-this";
 import { getDirector } from "@/lib/api/get-director";
 
-
 export default function Page() {
   const router = useRouter();
   const movieId = router.query.movieId;
   const [movie, setMovie] = useState({});
-   const [likeThis, setLikeThis] = useState([]);
-   const [director, setDirector] = useState({});
-  
-
-   const similar = async ()=> {
-    try {
-      const likeThis= await getLikeThis (movieId)
-      setLikeThis (likeThis)
-    } catch (error) {
-      
-    }
-   }
-   const directors = async ()=> {
-    try {
-      const director= await getDirector (movieId)
-      setDirector (director)
-    } catch (error) {
-      
-    }
-   }
 
   useEffect(() => {
     if (!movieId) return;
@@ -46,16 +25,14 @@ export default function Page() {
       setMovie(data);
     };
     getMovie();
-    similar()
-    directors()
   }, [movieId]);
   return (
     <div className="w-full lg:max-w-[1278px] mx-auto flex flex-col gap-y-[32px]">
       <Header />
-      <CoverDe movie={movie} />
+      <CoverDe movie={movie} movieId={movieId} />
       <InfoDe movie={movie} />
-      <Director director={director}/>
-      <MoreLikeThis likeThis={likeThis}/>
+      <Director id={movie.id} />
+      <MoreLikeThis movieId={movie.id} />
       <Footer />
     </div>
   );

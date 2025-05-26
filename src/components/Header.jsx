@@ -1,15 +1,18 @@
 import { Search, Moon, Film, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export const Header = () => {
   return (
     <div>
       <nav className="flex md:w-full p-[20px] md:justify-between justify-between  items-center">
         <div className="flex justify-center text-[#4338CA] ">
-          <Film />
-          <b className="text-[16px">
-            <i>MovieZ</i>
-          </b>
+          <Link href={"/"}>
+            <Film />
+            <b className="text-[16px">
+              <i>MovieZ</i>
+            </b>
+          </Link>
         </div>
 
         <div className="hidden md:flex gap-[12px] ">

@@ -2,10 +2,20 @@ import { ArrowRight } from "lucide-react";
 import { MovieCard } from "@/components/MovieCard";
 import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
+import { getLikeThis } from "@/lib/api/get-like-this";
 
+export const MoreLikeThis = ({ movieId }) => {
+  const [likeThis, setLikeThis] = useState([]);
 
+  useEffect(() => {
+    if (!movieId) return;
+    const similar = async () => {
+      const data = await getLikeThis(movieId);
 
-export const MoreLikeThis = ({likeThis}) => {
+      setLikeThis(data);
+    };
+    similar();
+  }, [movieId]);
 
   return (
     <div className="flex flex-col gap-8 p-5 md:px-20 ">

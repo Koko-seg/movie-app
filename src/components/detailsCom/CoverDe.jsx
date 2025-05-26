@@ -1,7 +1,8 @@
 import { Star, Play } from "lucide-react";
 import { Button } from "../ui/button";
+import { Trailer } from "../Trailer";
 
-export const CoverDe = ({ movie }) => {
+export const CoverDe = ({ movie, movieId }) => {
   const posterUrl = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/${movie?.poster_path}`;
   const backgroundUrl = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/${movie?.backdrop_path}`;
   console.log(movie);
@@ -43,10 +44,7 @@ export const CoverDe = ({ movie }) => {
             className="w-screen min-h-[246px] md:max-h-[600px] md:relative object-cover lg:object-top"
           />
           <div className="absolute flex items-center top-[80%] pl-[12px] text-[white] gap-[8px]">
-            <Button variant="secondary" className="rounded-[50px]">
-              <Play />
-            </Button>
-            <p className="text-[16px] text-[white]">Play Trailer</p>
+            <Trailer movieId={movieId} />
           </div>
         </div>
       </div>

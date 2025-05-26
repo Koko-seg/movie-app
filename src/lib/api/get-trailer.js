@@ -1,7 +1,7 @@
-export const getDirector = async (id) => {
+export const getTrailer = async (movieId) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/movie/${id}/credits?language=en-US`,
+      `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/movie/${movieId}/videos?language=en-US`,
       {
         method: "GET",
         headers: {
@@ -10,10 +10,9 @@ export const getDirector = async (id) => {
         },
       }
     );
+    const movies = await response.json();
 
-    const data = await response.json();
-
-    return data;
+    return movies;
   } catch (error) {
     console.log(error);
   }
