@@ -10,8 +10,9 @@ export const TopRated = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       const topRatedMovies = await getTopRatedMovies();
+      const firstTenMovies = topRatedMovies?.slice(0, 10);
 
-      setTopRatedMovies(topRatedMovies);
+      setTopRatedMovies(firstTenMovies);
     };
     fetchMovies();
   }, []);

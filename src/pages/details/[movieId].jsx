@@ -2,15 +2,11 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { getMovieById } from "@/lib/api/get-movie-id";
 import { Director } from "@/components/detailsCom/Director";
-
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-
 import { CoverDe } from "@/components/detailsCom/CoverDe";
 import { InfoDe } from "@/components/detailsCom/InfoDe";
 import { MoreLikeThis } from "@/components/detailsCom/MoreLikeThis";
-import { getLikeThis } from "@/lib/api/get-like-this";
-import { getDirector } from "@/lib/api/get-director";
 
 export default function Page() {
   const router = useRouter();
@@ -33,7 +29,9 @@ export default function Page() {
       <InfoDe movie={movie} />
       <Director id={movie.id} />
       <MoreLikeThis movieId={movie.id} />
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }
