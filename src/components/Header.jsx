@@ -1,8 +1,9 @@
-import { Search, Moon, Film, ChevronDown } from "lucide-react";
+import { Search, Moon, Film } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { Genres } from "./detailsCom/genre/Genres";
 
-export const Header = () => {
+export const Header = ({ genre }) => {
   return (
     <div>
       <nav className="flex md:w-full p-[20px] md:justify-between justify-between  items-center">
@@ -16,10 +17,8 @@ export const Header = () => {
         </div>
 
         <div className="hidden md:flex gap-[12px] ">
-          <Button variant="outline">
-            <ChevronDown />
-            Genre
-          </Button>
+          <Genres genre={genre} />
+
           <Button variant="outline">
             <Search />
             <input type="text" placeholder="Search" className="outline-none" />
