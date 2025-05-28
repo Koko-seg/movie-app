@@ -1,7 +1,7 @@
 import { Search, Moon, Film } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { Genres } from "./detailsCom/genre/Genres";
+import { Genres } from "./genre/Genres";
 
 export const Header = ({ genre }) => {
   return (
