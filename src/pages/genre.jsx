@@ -1,29 +1,29 @@
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Genres } from "@/components/genre/Genres";
-import { getGenreFilter } from "@/lib/api/get-filter";
+
 import { GenreSelect } from "@/components/genre/GenreSelect";
 import { MovieCard } from "@/components/MovieCard";
+import { getGenreFilter } from "@/lib/api/get-filter";
+import { useRouter } from "next/router";
 
 const GenrePage = () => {
   const router = useRouter();
-  const genreName = router.query?.genreFilter;
-  console.log(genreName);
+  const genreId = router.query.genreIds;
+  console.log(genreId);
   const [filterMovie, setFilterMovie] = useState({});
 
   useEffect(() => {
-    if (!genreName) return;
+    if (!genreId) return;
     const getFilter = async () => {
-      const data = await getGenreFilter(genreName);
+      const data = await getGenreFilter(genreId);
       console.log("genre", data);
 
       setFilterMovie(data);
     };
     getFilter();
-  }, [genreName]);
+  }, [genreId]);
 
   if (!filterMovie || !filterMovie.results) return null;
   const resultMovie = filterMovie.results;
@@ -34,15 +34,18 @@ const GenrePage = () => {
       <Header />
       <div className="w-screen md:max-w-[1800px] mx-auto pt-[52px]">
         <p className="font-semibold text-[30px]">Search Filter</p>
-        <div className="w-[385px]">
-          <GenreSelect />
-        </div>
-        <div className="p-5">
-          <p> Title</p>
-          <div>
-            {resultMovie?.map((movie) => (
-              <MovieCard movie={movie} key={movie.id} />
-            ))}
+        <div className="flex pt-8 gap-10 ">
+          <div className=" flex flex-wrap">
+            <GenreSelect />
+          </div>
+
+          <div className="p-5">
+            <p> Title </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4  gap-8">
+              {resultMovie?.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
