@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 const GenrePage = () => {
   const router = useRouter();
   const genreId = router.query.genreIds;
+
   console.log(genreId);
   const [filterMovie, setFilterMovie] = useState({});
 

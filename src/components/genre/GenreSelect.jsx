@@ -7,52 +7,45 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 
 export const GenreSelect = () => {
   const router = useRouter();
+
   const [genres, setGenres] = useState([]);
-  const [genreIds, setGenreIds] = useState([]);
 
-  // URL-аас genreIds-г авч state-д тохируулах
-  useEffect(() => {
-    if (!router.isReady) return; // router бэлэн биш байвал гарах
+  const [genreIds, setGenreIds] = useQueryState(
+    "genreIds",
+    parseAsArrayOf(parseAsInteger).withDefault([])
+  );
+  console.log("mmm", genreIds);
+  const [genreName, setGenreName] = useQueryState(
+    "genreIds",
+    parseAsArrayOf(parseAsInteger).withDefault([])
+  );
 
-    if (router.query.genreIds) {
-      const ids = Array.isArray(router.query.genreIds)
-        ? router.query.genreIds
-        : router.query.genreIds.split(",");
-
-      // Тогтмол тоонуудын массив болгож хөрвүүлэх
-      setGenreIds(ids.map((id) => Number(id)));
-    } else {
-      setGenreIds([]); // URL-д genreIds байхгүй бол хоосон
-    }
-  }, [router.isReady, router.query.genreIds]);
-
-  // Жанруудыг серверээс авч ирэх
   useEffect(() => {
     const fetchGenres = async () => {
-      const res = await getGenreName();
-      setGenres(res.genres);
+      const genreZ = await getGenreName();
+      setGenres(genreZ.genres);
     };
 
     fetchGenres();
   }, []);
 
-  // Toggle хийх функц
-  const handleSelectGenre = (id) => {
-    const newGenreIds = genreIds.includes(id)
-      ? genreIds.filter((genreId) => genreId !== id)
-      : [...genreIds, id];
+  const handleSelectGenre = (genreId, name) => {
+    const newGenreIds = genreIds?.includes(genreId)
+      ? genreIds?.filter((t) => t !== genreId)
+      : [...genreIds, genreId];
 
     setGenreIds(newGenreIds);
+    const newNames = genreName?.includes(name)
+      ? genreName?.filter((t) => t !== name)
+      : [...genreName, name];
 
-    router.push({
-      pathname: "/genre",
-      query: { genreIds: newGenreIds.join(",") },
-    });
+    setGenreName(newNames);
+    router.push(`/genre?genreIds=${newGenreIds}&name=${newNames}`);
   };
-
   return (
     <div>
       <DropdownMenuLabel className="font-bold text-[24px]">
@@ -64,18 +57,18 @@ export const GenreSelect = () => {
       <DropdownMenuSeparator />
       <div className="flex gap-3 flex-wrap font-bold pt-5">
         {genres.map((genre) => {
-          const isSelected = genreIds.includes(genre.id);
+          const isSelected = genreIds?.includes(genre.id, genre.name);
 
           return (
             <Button
               key={genre.id}
               variant={isSelected ? "primary" : "secondary"}
               className={`border-gray-400 border-[1px] rounded-full px-[10px] py-[2px] flex font-bold ${
-                isSelected ? "bg-blue-500 text-white" : "bg-white"
+                isSelected ? "bg-black text-white" : "bg-white"
               }`}
               onClick={() => handleSelectGenre(genre.id)}
             >
-              {genre.name} <ChevronRight />
+              {genre?.name} <ChevronRight />
             </Button>
           );
         })}

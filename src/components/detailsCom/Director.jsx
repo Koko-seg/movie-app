@@ -41,10 +41,10 @@ export const Director = ({ id }) => {
         </div>
       ))}
 
+      <p className="text-[16px] font-bold w-[64px]">Writers</p>
       {writers.map((person) => (
         <div key={person.id} className="flex px-[20px] gap-13">
-          <p className="text-[16px] font-bold w-[64px]">Writers</p>
-          <p className="text-[16px]">{person?.name}</p>
+          <p className="text-[16px]">{person.name}</p>
         </div>
       ))}
 
