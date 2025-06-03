@@ -1,11 +1,12 @@
 import { Star } from "lucide-react";
 import Link from "next/link";
+import { Image } from "./Image";
 
 export const MovieCard = ({ movie, movieId }) => {
   return (
     <div className="w-full rounded-lg bg-[#F4F4F5]">
       <Link href={`/details/${movieId}`}>
-        <img
+        <Image
           className="rounded-t-lg"
           src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
         />

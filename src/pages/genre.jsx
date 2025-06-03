@@ -34,9 +34,9 @@ const GenrePage = () => {
     <div>
       <Header />
       <div className="w-screen md:max-w-[1800px] mx-auto pt-[52px]">
-        <p className="font-semibold text-[30px]">Search Filter</p>
+        <p className="font-semibold text-[30px] pl-20">Search Filter</p>
         <div className="flex pt-8 gap-10 ">
-          <div className=" flex flex-wrap">
+          <div className=" flex flex-wrap pl-20">
             <GenreSelect />
           </div>
 

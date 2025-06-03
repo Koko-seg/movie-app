@@ -5,7 +5,7 @@ import { Trailer } from "../Trailer";
 export const CoverDe = ({ movie, movieId }) => {
   const posterUrl = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/${movie?.poster_path}`;
   const backgroundUrl = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/${movie?.backdrop_path}`;
-  console.log(movie);
+
   return (
     <div className="relative">
       <div className=" flex  justify-between">

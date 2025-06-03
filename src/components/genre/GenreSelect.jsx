@@ -20,8 +20,8 @@ export const GenreSelect = () => {
   );
   console.log("mmm", genreIds);
   const [genreName, setGenreName] = useQueryState(
-    "genreIds",
-    parseAsArrayOf(parseAsInteger).withDefault([])
+    "name",
+    parseAsArrayOf(String).withDefault([])
   );
 
   useEffect(() => {
@@ -57,16 +57,13 @@ export const GenreSelect = () => {
       <DropdownMenuSeparator />
       <div className="flex gap-3 flex-wrap font-bold pt-5">
         {genres.map((genre) => {
-          const isSelected = genreIds?.includes(genre.id, genre.name);
+          const isSelected = genreIds?.includes(genre.id);
 
           return (
             <Button
               key={genre.id}
-              variant={isSelected ? "primary" : "secondary"}
-              className={`border-gray-400 border-[1px] rounded-full px-[10px] py-[2px] flex font-bold ${
-                isSelected ? "bg-black text-white" : "bg-white"
-              }`}
-              onClick={() => handleSelectGenre(genre.id)}
+              variant={isSelected ? "primary" : "outline"}
+              onClick={() => handleSelectGenre(genre.id, genre.name)}
             >
               {genre?.name} <ChevronRight />
             </Button>

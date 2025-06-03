@@ -1,7 +1,6 @@
 import { Button } from "../ui/button";
 
 export const InfoDe = ({ movie }) => {
-  console.log(movie.genres);
   const littlePoster = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_SERVICE_URL}/${movie?.poster_path}`;
   return (
     <div>
