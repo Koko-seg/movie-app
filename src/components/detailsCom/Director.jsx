@@ -21,11 +21,15 @@ export const Director = ({ id }) => {
         const isWriter = data?.crew?.filter(
           (person) => person.department === "Writing"
         );
-        const isStar = data?.cast?.filter((person) => person.cast === "Cast");
+        const writers = isWriter.slice(0, 1);
+        const isStar = data?.cast?.filter(
+          (person) => person.known_for_department === "Acting"
+        );
+        const cast = isStar.slice(0, 3);
 
         setDirector(isDirector);
-        setWriters(isWriter);
-        setCasts(casts);
+        setWriters(writers);
+        setCasts(cast);
       } catch (error) {
         console.error("Failed to fetch directors:", error);
       }
@@ -36,26 +40,30 @@ export const Director = ({ id }) => {
 
   return (
     <div className="flex-col flex gap-y-[33px] divide-y">
-      <p className="  font-bold gap-13"> Director</p>
-      {directors.map((person) => (
-        <div key={person.id} className="flex px-[20px] gap-13 flex-col">
-          <p className="text-[16px]  ">{person.name}</p>
-        </div>
-      ))}
-
-      <p className="text-[16px] font-bold w-[64px]">Writers</p>
-      {writers.map((person) => (
-        <div key={person.id} className="flex px-[20px] gap-13">
-          <p className="text-[16px]">{person.name}</p>
-        </div>
-      ))}
-
-      <p className="text-[16px] font-bold w-[64px]">Stars</p>
-      {casts.map((cast) => (
-        <div key={cast.id} className="flex px-[20px] gap-13">
-          <p className="text-[16px]">{cast.name}</p>
-        </div>
-      ))}
+      <div className="flex">
+        <p className="font-bold gap-13"> Director</p>
+        {directors.map((person) => (
+          <div key={person.id} className="flex px-[20px] gap-13 flex-col">
+            <p className="text-[16px]  ">{person.name}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex">
+        <p className="text-[16px] font-bold w-[64px]">Writers</p>
+        {writers.map((person) => (
+          <div key={person.id} className="flex px-[20px] gap-13">
+            <p className="text-[16px]">{person.name}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex">
+        <p className="text-[16px] font-bold w-[64px]">Stars</p>
+        {casts.map((cast) => (
+          <div key={cast.id} className="flex px-[20px] gap-13">
+            <p className="text-[16px]">{cast.name}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

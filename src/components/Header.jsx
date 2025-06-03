@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { Genres } from "./genre/Genres";
 import { ModeToggle } from "./ModeToggle";
-import { SearchMovie } from "./SearchMovie";
+import { SearchMovie } from "./Search";
 
 export const Header = ({
   genre,

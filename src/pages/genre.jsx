@@ -7,50 +7,57 @@ import { GenreSelect } from "@/components/genre/GenreSelect";
 import { MovieCard } from "@/components/MovieCard";
 import { getGenreFilter } from "@/lib/api/get-filter";
 import { useRouter } from "next/router";
+import { useQueryState, parseAsInteger } from "nuqs";
 
 const GenrePage = () => {
   const router = useRouter();
   const genreId = router.query.genreIds;
 
-  console.log(genreId);
-  const [filterMovie, setFilterMovie] = useState({});
+  const [filterMovie, setFilterMovie] = useState(null);
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
 
   useEffect(() => {
     if (!genreId) return;
     const getFilter = async () => {
-      const data = await getGenreFilter(genreId);
+      const data = await getGenreFilter(genreId, page);
       console.log("genre", data);
 
       setFilterMovie(data);
     };
     getFilter();
-  }, [genreId]);
+  }, [genreId, page]);
 
-  if (!filterMovie || !filterMovie.results) return null;
-  const resultMovie = filterMovie.results;
-  console.log("kino", resultMovie);
+  const handleBackPage = () => {
+    setPage(page - 1);
+  };
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
 
   return (
-    <div>
+    <div className="w-full lg:max-w-[1278px] mx-auto flex flex-col gap-y-[32px]">
       <Header />
-      <div className="w-screen md:max-w-[1800px] mx-auto pt-[52px]">
-        <p className="font-semibold text-[30px] pl-20">Search Filter</p>
-        <div className="flex pt-8 gap-10 ">
-          <div className=" flex flex-wrap pl-20">
-            <GenreSelect />
-          </div>
+      <p className="font-semibold text-[30px] pl-20">Search Filter</p>
+      <div className="flex mt-8 ">
+        <div className=" flex flex-wrap w-[387px] ">
+          <GenreSelect />
+        </div>
 
-          <div className="p-5">
-            <p> Title </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4  gap-8">
-              {resultMovie?.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
-              ))}
-            </div>
+        <div className="p-5">
+          <p> Title </p>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4">
+            {filterMovie?.results?.map((movie) => (
+              <MovieCard movie={movie} key={movie.id} />
+            ))}
           </div>
         </div>
       </div>
-
+      <div className="flex gap-2">
+        {page > 1 && <button onClick={handleBackPage}>back</button>}
+        <button>{page}</button>
+        {500 > page && <button onClick={handleNextPage}>next</button>}
+      </div>
       <div>
         <Footer />
       </div>

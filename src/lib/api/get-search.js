@@ -1,7 +1,7 @@
-export const getGenreFilter = async (genreIds, page) => {
+export const getSearchSection = async (searchValue) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}discover/movie?language=en&with_genres=${genreIds}&page=${page}`,
+      `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/search/movie?query=${searchValue}&language=en-US&page=${page}`,
       {
         method: "GET",
         headers: {
@@ -11,9 +11,9 @@ export const getGenreFilter = async (genreIds, page) => {
       }
     );
 
-    const filter = await response.json();
-    // console.log(filter);
-    return filter;
+    const search = await response.json();
+
+    return search;
   } catch (error) {
     console.log(error);
   }

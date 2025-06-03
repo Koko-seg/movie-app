@@ -44,6 +44,7 @@ export const GenreSelect = () => {
       : [...genreName, name];
 
     setGenreName(newNames);
+
     router.push(`/genre?genreIds=${newGenreIds}&name=${newNames}`);
   };
   return (
@@ -55,7 +56,7 @@ export const GenreSelect = () => {
         See lists of movies by genre
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <div className="flex gap-3 flex-wrap font-bold pt-5">
+      <div className="flex flex-wrap gap-3 pt-5 font-bold">
         {genres.map((genre) => {
           const isSelected = genreIds?.includes(genre.id);
 
