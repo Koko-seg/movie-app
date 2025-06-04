@@ -4,7 +4,7 @@ import { Image } from "./Image";
 
 export const MovieCard = ({ movie, movieId }) => {
   return (
-    <div className="w-full rounded-lg bg-[#F4F4F5]">
+    <div className="w-full rounded-b-lg bg-[#F4F4F5]">
       <Link href={`/details/${movieId}`}>
         <Image
           className="rounded-t-lg"

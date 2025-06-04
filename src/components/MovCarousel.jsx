@@ -10,11 +10,14 @@ import {
 import { useState, useEffect } from "react";
 import { getNowPlayingMovies } from "@/lib/api/get-playing-now";
 import { MovieCarouselItem } from "./MovieCarouselItem";
+import { CarouselLoading } from "./CarouselLoading";
 
 export const MovCarousel = () => {
   const [nowPlayingMovie, setNowPlayingMovie] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchMovies = async () => {
       try {
         const movies = await getNowPlayingMovies();
@@ -24,8 +27,9 @@ export const MovCarousel = () => {
       }
     };
     fetchMovies();
+    setLoading(false);
   }, []);
-
+  if (loading) return <CarouselLoading />;
   return (
     <Carousel
       className="relative "
