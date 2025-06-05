@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import { getTopRatedMovies } from "@/lib/api/get-toprated-movies";
 import Link from "next/link";
-import { HomePageLoading } from "./MovieCardLoading";
+import { HomePageLoading, MovieCardLoading } from "./MovieCardLoading";
 
 export const TopRated = () => {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -20,7 +20,7 @@ export const TopRated = () => {
     fetchMovies();
     setLoading(false);
   }, []);
-  if (loading) return <HomePageLoading />;
+  if (loading) return <MovieCardLoading />;
   return (
     <div className="flex flex-col gap-8 p-5 md:px-20 ">
       <div className="flex justify-between md:gap-[32px]">

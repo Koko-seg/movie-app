@@ -8,7 +8,7 @@ import { MovieCardLoading } from "./MovieCardLoading";
 
 export const Upcoming = () => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -19,15 +19,13 @@ export const Upcoming = () => {
 
       setUpcomingMovies(firstTenMovies);
     };
-
+    setLoading(false);
     fetchMovies();
-    // setLoading(false);
   }, []);
-  // if (loading) return <MovieCardLoading />;
+  if (loading) return <MovieCardLoading />;
 
   return (
     <div>
-      <div>{loading && <MovieCardLoading />}</div>
       <div className="flex flex-col gap-8 p-5 md:px-20 ">
         <div className="flex justify-between md:gap-[32px]">
           <h1 className=" font-semibold text-[black] ">Upcoming</h1>

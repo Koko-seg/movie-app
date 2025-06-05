@@ -1,7 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { MovieCard } from "@/components/MovieCard";
-import { getUpcomingMovies } from "@/lib/api/get-upcoming-movie";
+
 import { useEffect, useState } from "react";
 import { parseAsInteger, useQueryState } from "nuqs";
 import {
@@ -14,20 +14,26 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const UpcomingPage = () => {
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
+import { getLikeThis } from "@/lib/api/get-like-this";
+import { useRouter } from "next/router";
+
+const MoreLikeThisPage = () => {
+  const [likeThis, setLikeThis] = useState([]);
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
   const [totalPages, setTotalPages] = useState(0);
+  const router = useRouter();
+  const { movieId } = router.query;
 
   useEffect(() => {
+    if (!movieId) return;
     const fetchMovies = async () => {
-      const data = await getUpcomingMovies(page);
+      const data = await getLikeThis(movieId);
 
-      setUpcomingMovies(data?.results);
+      setLikeThis(data?.results);
       setTotalPages(data?.total_pages);
     };
     fetchMovies();
-  }, [page]);
+  }, [movieId]);
 
   const handlePrevPage = () => {
     setPage(page - 1);
@@ -50,28 +56,43 @@ const UpcomingPage = () => {
     <div className="w-full lg:max-w-[1278px] mx-auto">
       <Header />
       <div className="flex flex-col md:gap-[32px]">
-        <h1 className=" font-semibold text-[black] ">Upcoming</h1>
+        <h1 className=" font-semibold text-[black] ">More Like This</h1>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {upcomingMovies?.map((movie) => (
+          {likeThis?.map((movie) => (
             <MovieCard key={movie.id} movie={movie} movieId={movie.id} />
           ))}
         </div>
         <Pagination>
           <PaginationContent>
-            <PaginationItem className="cursor-pointer">
+            <PaginationItem>
               <PaginationPrevious onClick={handlePrevPage} />
             </PaginationItem>
 
-            {paginations?.map((pageNumber) => {
-              return (
-                <PaginationItem className="cursor-pointer">
-                  <PaginationLink onClick={() => handleSelectPage(pageNumber)}>
-                    {pageNumber}
+            {paginations.map((pageNumber) => (
+              <PaginationItem key={pageNumber}>
+                <PaginationLink
+                  isActive={pageNumber === page}
+                  onClick={() => handleSelectPage(pageNumber)}
+                >
+                  {pageNumber}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+
+            {totalPages > 3 && (
+              <>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink onClick={() => handleSelectPage(totalPages)}>
+                    {totalPages}
                   </PaginationLink>
                 </PaginationItem>
-              );
-            })}
-            <PaginationItem className="cursor-pointer">
+              </>
+            )}
+
+            <PaginationItem>
               <PaginationNext onClick={handleNextPage} />
             </PaginationItem>
           </PaginationContent>
@@ -82,4 +103,4 @@ const UpcomingPage = () => {
   );
 };
 
-export default UpcomingPage;
+export default MoreLikeThisPage;

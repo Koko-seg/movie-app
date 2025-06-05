@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { getPopularMovies } from "@/lib/api/get-popular-movies";
 import { MovieCard } from "./MovieCard";
 import Link from "next/link";
-import { HomePageLoading } from "./MovieCardLoading";
+import { MovieCardLoading } from "./MovieCardLoading";
 
 export const Popular = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -21,7 +21,7 @@ export const Popular = () => {
     fetchMovies();
     setLoading(false);
   }, []);
-  if (loading) return <HomePageLoading />;
+  if (loading) return <MovieCardLoading />;
   return (
     <div className="flex flex-col gap-8 p-5 md:px-20 ">
       <div className="flex justify-between md:gap-[32px]">

@@ -12,8 +12,8 @@ export const getGenreName = async () => {
     );
 
     const genre = await response.json();
-    
-    return genre
+    // console.log("genre", genre);
+    return genre;
   } catch (error) {
     console.log(error);
   }
