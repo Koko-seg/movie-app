@@ -6,6 +6,8 @@ import { Input } from "./ui/input";
 
 import React, { useEffect, useState } from "react";
 import { SearchResults } from "./SearchResults";
+import { Search } from "lucide-react";
+import Link from "next/link";
 
 export const SearchHeader = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -21,13 +23,15 @@ export const SearchHeader = () => {
 
   return (
     <div className="relative">
-      <Input
-        onChange={(event) => setSearchValue(event.target.value)}
-        value={searchValue}
-        type="text"
-        placeholder="Search..."
-        className={cn("pl-[38px]", "border-none shadow-none")}
-      />
+      <div className="flex ">
+        <Input
+          onChange={(event) => setSearchValue(event.target.value)}
+          value={searchValue}
+          type="text"
+          placeholder="Search..."
+          className={cn("pl-[38px]", "border-none shadow-none")}
+        />
+      </div>
       {movies?.results?.length > 0 && (
         <SearchResults movies={movies} setSearchValue={setSearchValue} />
       )}

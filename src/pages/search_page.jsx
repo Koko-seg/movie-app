@@ -13,25 +13,20 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { getSearchSection } from "@/lib/api/get-search";
+import { Genres } from "@/components/genre/Genres";
 
-import { getLikeThis } from "@/lib/api/get-like-this";
-import { useRouter } from "next/router";
-
-const MoreLikeThisPage = () => {
-  const [likeThis, setLikeThis] = useState([]);
+const SearchMoviePage = () => {
+  const [searchValue, setSearchValue] = useState([]);
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
   const [totalPages, setTotalPages] = useState(0);
-  // const router = useRouter();
-  // const { movieId } = router.query.movieId;
 
   useEffect(() => {
-    // if (!movieId) return;
     const fetchMovies = async () => {
-      const data = await getLikeThis(page);
+      const data = await getSearchSection(page);
 
-      setLikeThis(data?.results);
+      setSearchValue(data?.results);
       setTotalPages(data?.total_pages);
-      console.log("data", data.results);
     };
     fetchMovies();
   }, [page]);
@@ -51,17 +46,19 @@ const MoreLikeThisPage = () => {
     .fill(null)
     .map((_, index) => index + 1)
     .slice(0, 3);
-  console.log(paginations);
 
   return (
     <div className="w-full lg:max-w-[1278px] mx-auto">
       <Header />
       <div className="flex flex-col md:gap-[32px]">
-        <h1 className=" font-semibold text-[black] ">More Like This</h1>
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {likeThis?.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} movieId={movie.id} />
-          ))}
+        <h1 className=" font-semibold text-[black] ">Search results </h1>
+        <div>
+          <Genres />
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {searchValue?.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} movieId={movie.id} />
+            ))}
+          </div>
         </div>
         <Pagination>
           <PaginationContent>
@@ -104,4 +101,4 @@ const MoreLikeThisPage = () => {
   );
 };
 
-export default MoreLikeThisPage;
+export default SearchMoviePage;

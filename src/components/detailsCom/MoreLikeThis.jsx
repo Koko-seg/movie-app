@@ -4,26 +4,30 @@ import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
 import { getLikeThis } from "@/lib/api/get-like-this";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export const MoreLikeThis = ({ id }) => {
+export const MoreLikeThis = () => {
+  const router = useRouter();
+  const movieId = router.query.movieId;
   const [likeThis, setLikeThis] = useState([]);
 
   useEffect(() => {
+    if (!movieId) return;
     const similar = async () => {
-      const likeThis = await getLikeThis();
+      const likeThis = await getLikeThis(movieId);
 
       const firstTenMovies = likeThis.results?.slice(0, 10);
 
       setLikeThis(firstTenMovies);
     };
     similar();
-  }, [id]);
+  }, [movieId]);
 
   return (
     <div className="flex flex-col gap-8 p-5 md:px-20 ">
       <div className="flex justify-between md:gap-[32px]">
         <h1 className=" font-semibold text-[black] ">More Like This</h1>
-        <Link href={`/similar`}>
+        <Link href={`/more_like_this`}>
           <Button variant="ghost">
             See more <ArrowRight className="w-[16px] h-[16px]" />
           </Button>

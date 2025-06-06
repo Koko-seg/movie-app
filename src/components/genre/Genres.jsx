@@ -18,7 +18,7 @@ export const Genres = () => {
             Genres
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-150 p-5">
+        <DropdownMenuContent className="p-5 w-150">
           <GenreSelect />
         </DropdownMenuContent>
       </DropdownMenu>
