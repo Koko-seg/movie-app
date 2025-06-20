@@ -14,8 +14,10 @@ export const Genres = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline">
-            <ChevronDown />
-            Genres
+            <ChevronDown /> <p className="hidden sm:block">
+ Genres
+            </p>
+           
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="p-5 w-150">

@@ -1,48 +1,77 @@
-import { Moon, Film, Search } from "lucide-react";
-import { Button } from "./ui/button";
+import {  Film, Search } from "lucide-react";
+
 import Link from "next/link";
 import { Genres } from "./genre/Genres";
 import { ModeToggle } from "./ModeToggle";
 import { SearchHeader } from "./SearchHeader";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/router";
 
-export const Header = ({ genre, id }) => {
-  const router = useRouter();
-  const searchClick = () => {
-    setSearchValue("");
-    router.push(`/details/${id}`);
-  };
+
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Button } from "./ui/button";
+
+export const Header = ({ genre}) => {
+const [visible, setVisible] = useState (false)
+
+
+  
   return (
     <div>
       <nav className="flex md:w-full p-[20px] md:justify-between justify-between  items-center">
-        <div className="flex justify-center text-[#4338CA] ">
+       
+        <div className=" text-[#4338CA] gap-[20px] ">
+           {!visible &&(
+       
           <Link href={"/"}>
-            <Film />
+            <div className="flex gap-2"><Film />
             <b className="text-[16px]">
               <i>MovieZ</i>
-            </b>
+            </b></div>
+            
           </Link>
+          )}
         </div>
 
         <div className=" hidden md:flex gap-[12px] flex-row">
           <Genres genre={genre} />
-          <div className={cn("relative text-muted-foreground", "w-[379px]")}>
-            <Search
-              size={16}
-              className="absolute -translate-y-1/2 cursor-pointer left-3 top-1/2"
-              onClick={searchClick}
-            />
+     
+           
 
             <SearchHeader />
-          </div>
+       
         </div>
-        <div className="flex items-center gap-[12px]">
-          <Button variant="outline" className="flex md:hidden">
-            <Search />
-          </Button>
+         <div className="flex justify-center  pb-8 p-2">
+       {!visible && (
+  <Button
+    variant="outline"
+    size="icon"
+    onClick={() => setVisible(true)}
+    aria-expanded={visible}
+    aria-label="Toggle search"
+    className="md:hidden"
+  >
+    <Search className="w-4 h-4" />
+  </Button>
+)}
 
-          <ModeToggle />
+        <AnimatePresence>
+          {visible && (
+            <motion.div
+            initial="hidden" animate="visible" exit="hidden"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="absolute  left-20  px-3 "
+            layout>
+              <div className="  w-full  rounded-xl md:hidden">
+                <SearchHeader />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {!visible && (
+          <div className="flex items-center sm:space-x-2">
+            <ModeToggle />
+          </div>
+        )}
         </div>
       </nav>
     </div>
