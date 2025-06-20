@@ -20,7 +20,7 @@ import { GenreSelect } from "@/components/genre/GenreSelect";
 const SearchMoviePage = () => {
   const [searchValue, setSearchValue] = useState([]);
   const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(0); // ene heseg dutu
 
   useEffect(() => {
     const fetchMovies = async () => {
